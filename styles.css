@@ -326,6 +326,10 @@ ul, ol {
 .hero__content > *:nth-child(8) { animation-delay: 0.44s; }
 .hero__content > *:nth-child(9) { animation-delay: 0.5s; }
 
+.hero__content > .hero__title {
+  animation: none;
+}
+
 .hero__name {
   font-size: clamp(1.625rem, 2.5vw, 2rem);
   margin-bottom: 8px;
@@ -353,6 +357,23 @@ ul, ol {
   font-size: var(--heading-xl);
   line-height: 1.1;
   margin-bottom: 32px;
+}
+
+.hero__title.blur-text {
+  animation: none;
+}
+
+.blur-text__line {
+  display: block;
+}
+
+.blur-text__segment {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: inherit;
 }
 
 .hero__text {
