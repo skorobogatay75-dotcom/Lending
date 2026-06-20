@@ -7,11 +7,10 @@
   <title>Мария Скоробогатая — Нейросети для экспертов и бизнеса</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
 
   <header class="header">
     <div class="container header__inner">
@@ -22,6 +21,7 @@
       <nav class="nav" aria-label="Основная навигация">
         <a href="#services">Услуги</a>
         <a href="#about">Обо мне</a>
+        <a href="#portfolio">Портфолио</a>
         <a href="#pricing">Стоимость</a>
         <a href="#faq">Вопросы</a>
       </nav>
@@ -179,28 +179,34 @@
         <h2 class="section__title">Услуги</h2>
         <div class="services-grid">
           <article class="service-card">
-            <h3>GPT-агент для эксперта</h3>
-            <p>Помогает отвечать клиентам, рассказывать об услугах, собирать заявки и сопровождать человека до обращения.</p>
+            <h3>GPT-агент</h3>
+            <p>Помогает отвечать клиентам, рассказывать об услугах и собирать заявки.</p>
+            <p class="service-card__price">от 10 000 ₽</p>
           </article>
           <article class="service-card">
             <h3>Контент-план</h3>
-            <p>Темы, рубрики и структура контента, которые помогают выстраивать доверие и продажи.</p>
+            <p>Темы, рубрики и структура контента для доверия и продаж.</p>
+            <p class="service-card__price">от 15 000 ₽</p>
           </article>
           <article class="service-card">
             <h3>Анализ целевой аудитории</h3>
-            <p>Помогаю понять, кому вы продаёте, какие задачи решает ваш продукт и что важно для клиента.</p>
+            <p>Помогаю понять, кому вы продаёте и что важно для клиента.</p>
+            <p class="service-card__price">20 000 ₽</p>
           </article>
           <article class="service-card">
             <h3>Воронка продаж</h3>
-            <p>Создаю маршрут клиента от знакомства до заявки.</p>
+            <p>Маршрут клиента от знакомства до заявки.</p>
+            <p class="service-card__price">30 000 ₽</p>
           </article>
           <article class="service-card">
             <h3>Лендинг и упаковка услуг</h3>
-            <p>Структура, тексты и логика страницы, которая помогает человеку быстро понять ценность предложения.</p>
+            <p>Структура и тексты страницы, которая объясняет ценность предложения.</p>
+            <p class="service-card__price">от 20 000 ₽</p>
           </article>
           <article class="service-card">
             <h3>Нейрофотосессия и AI-визуал</h3>
-            <p>Изображения для социальных сетей, сайта, презентаций и рекламных материалов.</p>
+            <p>Изображения для соцсетей, сайта, презентаций и рекламы.</p>
+            <p class="service-card__price">от 2 500 ₽</p>
           </article>
         </div>
       </div>
@@ -244,50 +250,59 @@
       </div>
     </section>
 
-    <!-- Portfolio -->
-    <section class="section section--alt" id="portfolio">
+    <!-- About -->
+    <section class="section about" id="about">
       <div class="container">
-        <h2 class="section__title">Портфолио</h2>
-        <p class="section__lead">За последние месяцы я работала с проектами из разных ниш:</p>
-        <ul class="bullet-list bullet-list--inline">
-          <li>психологи и коучи;</li>
-          <li>эксперты и наставники;</li>
-          <li>репетиторы и преподаватели;</li>
-          <li>нутрициологи;</li>
-          <li>специалисты помогающих профессий;</li>
-          <li>предприниматели малого бизнеса.</li>
-        </ul>
-        <p class="section__lead">В портфолио представлены:</p>
-        <ul class="tags">
-          <li>GPT-агенты</li>
-          <li>контент-планы</li>
-          <li>лендинги</li>
-          <li>маркетинговые стратегии</li>
-          <li>воронки продаж</li>
-          <li>визуальные материалы и AI-контент</li>
-        </ul>
-        <div class="section__cta">
-          <a href="#contact" class="btn btn--outline">Смотреть портфолио</a>
+        <h2 class="section__title">Почему мне доверяют</h2>
+        <div class="about__inner">
+          <div class="about__visual">
+            <figure class="about__frame">
+              <img src="images/maria.jpg" alt="Мария Скоробогатая" class="about__photo" width="420" height="520">
+            </figure>
+          </div>
+          <div class="about__content">
+            <p class="about__name">Мария Скоробогатая</p>
+            <p class="about__tagline">Промпт-инженер • AI-интегратор • Вайбкодер</p>
+            <ul class="about__highlights">
+              <li><strong>30+ лет</strong> опыта в образовании</li>
+              <li><strong>16 лет</strong> управленческой работы</li>
+              <li>Сертификат <strong>промпт-инженера</strong></li>
+              <li><strong>Системный подход</strong> к каждой задаче</li>
+              <li>Объясняю <strong>сложное простыми словами</strong></li>
+            </ul>
+            <p>Сегодня я помогаю экспертам и предпринимателям использовать нейросети не ради тренда, а ради реальной пользы.</p>
+            <p class="about__quote">Для меня важно, чтобы технологии помогали человеку, а не усложняли ему жизнь.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- About -->
-    <section class="section about" id="about">
-      <div class="container about__inner">
-        <div class="about__content">
-          <h2 class="section__title">Почему мне доверяют</h2>
-          <p class="about__name">Мария Скоробогатая</p>
-          <p class="about__tagline">Промпт-инженер • AI-интегратор • Вайбкодер</p>
-          <p>Около 30 лет я работаю в сфере образования и управления людьми. 16 лет занимала должность заместителя директора по учебно-воспитательной работе.</p>
-          <p>Этот опыт научил меня видеть систему там, где другие видят хаос, и объяснять сложные вещи простым человеческим языком.</p>
-          <p>Сегодня я помогаю экспертам и предпринимателям использовать нейросети не ради тренда, а ради реальной пользы.</p>
-          <p class="about__quote">Для меня важно, чтобы технологии помогали человеку, а не усложняли ему жизнь.</p>
-        </div>
-        <div class="about__visual">
-          <figure class="about__frame">
-            <img src="images/maria.jpg" alt="Мария Скоробогатая" class="about__photo" width="280" height="280">
-          </figure>
+    <!-- Portfolio -->
+    <section class="section" id="portfolio">
+      <div class="container">
+        <h2 class="section__title">Портфолио</h2>
+        <p class="section__lead">Проекты для психологов, коучей, экспертов, репетиторов и предпринимателей малого бизнеса.</p>
+        <div class="portfolio-grid">
+          <a href="#contact" class="portfolio-card">
+            <span class="portfolio-card__title">GPT-агенты</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card">
+            <span class="portfolio-card__title">Лендинги</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card">
+            <span class="portfolio-card__title">Контент-планы</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card">
+            <span class="portfolio-card__title">Маркетинговые стратегии</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card">
+            <span class="portfolio-card__title">Нейровизуал</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
         </div>
       </div>
     </section>
@@ -420,7 +435,7 @@
             <li>Без обязательств.</li>
             <li>Без сложных терминов.</li>
           </ul>
-          <a href="https://t.me/mariaskorobogatayAI" class="btn btn--light btn--lg" target="_blank" rel="noopener">Записаться на диагностику</a>
+          <a href="https://t.me/mariaskorobogatayAI" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Записаться на диагностику</a>
         </div>
         <div class="contact__info">
           <h3 class="heading-sm">Контакты</h3>
