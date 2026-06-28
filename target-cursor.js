@@ -324,7 +324,7 @@
     '.infinite-menu__action',
     '.faq-item',
     '.price-item',
-    '.review-card',
+    '.circular-testimonials__arrow',
     '.hero__photo-wrap',
     '.about__frame',
     '.about__highlights',
