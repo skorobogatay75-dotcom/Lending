@@ -168,6 +168,12 @@
   margin-top: 0.5rem;
 }
 
+.booking-form__submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .booking-form__error {
   margin: 0;
   font-size: 0.875rem;

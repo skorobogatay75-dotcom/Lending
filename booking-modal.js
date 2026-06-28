@@ -1,11 +1,17 @@
 (function () {
-  const EMAIL = 'cmks0106@mail.ru';
-  const TELEGRAM = 'https://t.me/mariaskorobogatayAI';
-
   let lastFocus = null;
 
   function $(selector, root = document) {
     return root.querySelector(selector);
+  }
+
+  function getConfig() {
+    return window.BOOKING_CONFIG || {};
+  }
+
+  function getApiUrl() {
+    const config = getConfig();
+    return config.apiUrl || '/api/telegram';
   }
 
   function validateEmail(value) {
@@ -45,6 +51,7 @@
     const form = $('.booking-form', modal);
     const success = $('.booking-modal__success', modal);
     const error = $('.booking-form__error', modal);
+    const submitBtn = form ? form.querySelector('[type="submit"]') : null;
 
     if (form) {
       form.reset();
@@ -52,6 +59,11 @@
       form.querySelectorAll('.booking-form__input.is-invalid').forEach((el) => {
         el.classList.remove('is-invalid');
       });
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitBtn.dataset.defaultText || 'Отправить заявку';
     }
 
     if (success) success.hidden = true;
@@ -65,7 +77,13 @@
     error.hidden = false;
   }
 
-  function handleSubmit(modal, form) {
+  function showSuccess(modal, form) {
+    form.hidden = true;
+    const success = $('.booking-modal__success', modal);
+    if (success) success.hidden = false;
+  }
+
+  async function handleSubmit(modal, form) {
     const error = $('.booking-form__error', form);
     if (error) error.hidden = true;
 
@@ -73,6 +91,7 @@
     const emailInput = form.elements.email;
     const phoneInput = form.elements.phone;
     const consentInput = form.elements.consent;
+    const submitBtn = form.querySelector('[type="submit"]');
 
     [nameInput, emailInput, phoneInput].forEach((input) => {
       input.classList.remove('is-invalid');
@@ -109,25 +128,42 @@
       return;
     }
 
-    const subject = encodeURIComponent('Заявка на диагностику');
-    const body = encodeURIComponent(
-      `Новая заявка на диагностику\n\nИмя: ${name}\nE-mail: ${email}\nТелефон: ${phone}\n\nСогласие на обработку персональных данных: да`
-    );
+    if (submitBtn) {
+      if (!submitBtn.dataset.defaultText) {
+        submitBtn.dataset.defaultText = submitBtn.textContent;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка...';
+    }
 
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch(getApiUrl(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          consent: true
+        })
+      });
 
-    const telegramText = encodeURIComponent(
-      `Заявка на диагностику\nИмя: ${name}\nE-mail: ${email}\nТелефон: ${phone}`
-    );
+      const data = await response.json().catch(() => ({}));
 
-    form.hidden = true;
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || 'Request failed');
+      }
 
-    const success = $('.booking-modal__success', modal);
-    if (success) {
-      success.hidden = false;
-      const link = success.querySelector('[data-booking-telegram]');
-      if (link) {
-        link.href = `${TELEGRAM}?text=${telegramText}`;
+      showSuccess(modal, form);
+    } catch (err) {
+      showError(
+        form,
+        `Не удалось отправить заявку. Напишите в Telegram: @mariaskorobogatayAI`
+      );
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtn.dataset.defaultText || 'Отправить заявку';
       }
     }
   }
