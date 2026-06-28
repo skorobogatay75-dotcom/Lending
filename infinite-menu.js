@@ -1003,9 +1003,9 @@ const defaultItems = [
 export const PORTFOLIO_ITEMS = [
   {
     title: 'GPT-агенты',
-    description: 'Цифровые помощники для ответов клиентам и сбора заявок.',
+    description: 'Копирайтер мощных продающих текстов для экспертов и бизнеса.',
     link: '#contact',
-    image: 'images/Телеграм-бот.png'
+    image: 'images/portfolio/gpt-copywriter.png'
   },
   {
     title: 'Лендинги',
@@ -1014,16 +1014,28 @@ export const PORTFOLIO_ITEMS = [
     image: 'images/лендинг.png'
   },
   {
-    title: 'Контент-планы',
-    description: 'Темы, рубрики и система публикаций на месяц вперёд.',
+    title: 'Контент-план на 7 дней',
+    description: 'Подробная таблица: форматы, темы, хуки и лид-магниты.',
     link: '#contact',
-    image: 'images/GPT-агент Копирайтер.png'
+    image: 'images/portfolio/content-plan-7days.png'
+  },
+  {
+    title: 'Прогрев на 5 дней',
+    description: 'Таблица прогрева: темы, эмоции и призывы к действию.',
+    link: '#contact',
+    image: 'images/portfolio/content-warmup-5days.png'
   },
   {
     title: 'Маркетинговые стратегии',
     description: 'Воронки продаж и путь клиента от знакомства до заявки.',
     link: '#contact',
     image: 'images/Маркетинговая стратегия 2.png'
+  },
+  {
+    title: 'Боты',
+    description: 'Telegram-бот — копирайтер для создания контента канала.',
+    link: 'https://t.me/mariaskorobogatayAI',
+    image: 'images/portfolio/telegram-copywriter-bot.png'
   },
   {
     title: 'Нейровизуал',
