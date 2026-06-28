@@ -1,254 +1,219 @@
 /**
- * Circular Testimonials — vanilla JS (адаптация для HTML-сайта)
+ * Reviews carousel — vanilla JS, без внешних зависимостей
  */
-import { animate } from 'https://cdn.jsdelivr.net/npm/motion@11.15.0/+esm';
-
-const TESTIMONIALS = [
-  {
-    quote:
-      'Было: публиковала контент хаотично, не понимала, что писать. Что сделали: разработали контент-план на месяц с рубриками и темами. Что изменилось: появилась система, стала публиковать регулярно и получать больше откликов.',
-    name: 'Психолог',
-    designation: 'частная практика',
-    src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80'
-  },
-  {
-    quote:
-      'Было: тратила по 2–3 часа в день на однотипные вопросы в директе. Что сделали: настроили GPT-агента для первичных ответов и сбора заявок. Что изменилось: освободилось время для работы с клиентами, заявки стали приходить стабильнее.',
-    name: 'Коуч по карьере',
-    designation: '',
-    src: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=900&auto=format&fit=crop&q=80'
-  },
-  {
-    quote:
-      'Было: блог есть, подписчики есть, но заявок почти нет. Что сделали: проанализировали аудиторию и выстроили воронку продаж. Что изменилось: понятный путь от поста до записи на консультацию, заявки выросли в 3 раза.',
-    name: 'Нутрициолог',
-    designation: '',
-    src: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&auto=format&fit=crop&q=80'
-  },
-  {
-    quote:
-      'Было: сложно объяснить, чем моя услуга отличается от других. Что сделали: сформулировали оффер и создали лендинг с понятной структурой. Что изменилось: клиенты сразу понимают ценность, меньше возражений на консультации.',
-    name: 'Репетитор английского',
-    designation: '',
-    src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&auto=format&fit=crop&q=80'
-  }
-];
-
-function calculateGap(width) {
-  const minWidth = 1024;
-  const maxWidth = 1456;
-  const minGap = 60;
-  const maxGap = 86;
-  if (width <= minWidth) return minGap;
-  if (width >= maxWidth) return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
-  return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
-}
-
-function getImageStyle(index, activeIndex, length, containerWidth) {
-  const gap = calculateGap(containerWidth);
-  const maxStickUp = gap * 0.8;
-  const isActive = index === activeIndex;
-  const isLeft = (activeIndex - 1 + length) % length === index;
-  const isRight = (activeIndex + 1) % length === index;
-  const transition = 'all 0.8s cubic-bezier(.4,2,.3,1)';
-
-  if (isActive) {
-    return {
-      zIndex: '3',
-      opacity: '1',
-      pointerEvents: 'auto',
-      transform: 'translateX(0px) translateY(0px) scale(1) rotateY(0deg)',
-      transition
-    };
-  }
-  if (isLeft) {
-    return {
-      zIndex: '2',
-      opacity: '1',
-      pointerEvents: 'auto',
-      transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`,
-      transition
-    };
-  }
-  if (isRight) {
-    return {
-      zIndex: '2',
-      opacity: '1',
-      pointerEvents: 'auto',
-      transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`,
-      transition
-    };
-  }
-  return {
-    zIndex: '1',
-    opacity: '0',
-    pointerEvents: 'none',
-    transform: 'translateX(0px) translateY(0px) scale(0.8) rotateY(0deg)',
-    transition
-  };
-}
-
-function animateQuoteWords(container, text) {
-  container.innerHTML = '';
-  const words = text.split(' ');
-  words.forEach((word, i) => {
-    const span = document.createElement('span');
-    span.className = 'circular-testimonials__word';
-    span.textContent = word;
-    container.appendChild(span);
-    if (i < words.length - 1) {
-      container.appendChild(document.createTextNode('\u00A0'));
+(function () {
+  const TESTIMONIALS = [
+    {
+      name: 'Елена',
+      designation: 'Психолог, частная практика',
+      photo: 'images/reviews/elena.jpg',
+      accent: 'rose',
+      was: 'публиковала контент хаотично, не понимала, что писать.',
+      did: 'разработали контент-план на месяц с рубриками и темами.',
+      result: 'появилась система, стала публиковать регулярно и получать больше откликов.'
+    },
+    {
+      name: 'Ольга',
+      designation: 'Коуч по карьере',
+      photo: 'images/reviews/olga.jpg',
+      accent: 'violet',
+      was: 'тратила по 2–3 часа в день на однотипные вопросы в директе.',
+      did: 'настроили GPT-агента для первичных ответов и сбора заявок.',
+      result: 'освободилось время для работы с клиентами, заявки стали приходить стабильнее.'
+    },
+    {
+      name: 'Марина',
+      designation: 'Нутрициолог',
+      photo: 'images/reviews/marina.jpg',
+      accent: 'emerald',
+      was: 'блог есть, подписчики есть, но заявок почти нет.',
+      did: 'проанализировали аудиторию и выстроили воронку продаж.',
+      result: 'понятный путь от поста до записи на консультацию, заявки выросли в 3 раза.'
+    },
+    {
+      name: 'Ирина',
+      designation: 'Репетитор английского',
+      photo: 'images/reviews/irina.jpg',
+      accent: 'amber',
+      was: 'сложно объяснить, чем моя услуга отличается от других.',
+      did: 'сформулировали оффер и создали лендинг с понятной структурой.',
+      result: 'клиенты сразу понимают ценность, меньше возражений на консультации.'
     }
+  ];
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      span.style.opacity = '1';
-      span.style.filter = 'none';
-      span.style.transform = 'none';
-      return;
-    }
+  function createSlide(item, index) {
+    const slide = document.createElement('article');
+    slide.className = 'reviews-carousel__slide';
+    slide.dataset.index = String(index);
+    slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
 
-    animate(
-      span,
-      { filter: ['blur(10px)', 'blur(0px)'], opacity: [0, 1], y: [5, 0] },
-      { duration: 0.22, ease: 'easeInOut', delay: 0.025 * i }
-    );
-  });
-}
+    const designation = item.designation
+      ? `<p class="reviews-carousel__role">${item.designation}</p>`
+      : '';
 
-function initCircularTestimonials(root, testimonials = TESTIMONIALS, options = {}) {
-  const autoplay = options.autoplay ?? true;
-  const intervalMs = options.intervalMs ?? 5000;
-  let activeIndex = 0;
-  let autoplayTimer = null;
-  let containerWidth = 900;
-
-  root.innerHTML = `
-    <div class="circular-testimonials__grid">
-      <div class="circular-testimonials__images" aria-hidden="true"></div>
-      <div class="circular-testimonials__content">
-        <div class="circular-testimonials__text">
-          <h3 class="circular-testimonials__name"></h3>
-          <p class="circular-testimonials__designation"></p>
-          <blockquote class="circular-testimonials__quote"></blockquote>
+    slide.innerHTML = `
+      <header class="reviews-carousel__header">
+        <div class="reviews-carousel__photo reviews-carousel__photo--${item.accent}" data-fallback="${item.name.charAt(0)}">
+          <img
+            class="reviews-carousel__photo-img"
+            src="${item.photo}"
+            alt="${item.name}"
+            width="72"
+            height="72"
+            loading="${index === 0 ? 'eager' : 'lazy'}"
+            decoding="async"
+          >
         </div>
-        <div class="circular-testimonials__nav">
-          <button type="button" class="circular-testimonials__arrow circular-testimonials__arrow--prev cursor-target" aria-label="Предыдущий отзыв">
+        <div class="reviews-carousel__meta">
+          <h3 class="reviews-carousel__name">${item.name}</h3>
+          ${designation}
+        </div>
+      </header>
+      <div class="reviews-carousel__steps">
+        <div class="reviews-carousel__step">
+          <span class="reviews-carousel__label">Было</span>
+          <p>${item.was}</p>
+        </div>
+        <div class="reviews-carousel__step">
+          <span class="reviews-carousel__label">Что сделали</span>
+          <p>${item.did}</p>
+        </div>
+        <div class="reviews-carousel__step reviews-carousel__step--result">
+          <span class="reviews-carousel__label">Что изменилось</span>
+          <p>${item.result}</p>
+        </div>
+      </div>
+    `;
+
+    return slide;
+  }
+
+  function bindPhotoFallbacks(root) {
+    root.querySelectorAll('.reviews-carousel__photo-img').forEach((img) => {
+      img.addEventListener('error', () => {
+        const wrap = img.closest('.reviews-carousel__photo');
+        if (!wrap || wrap.classList.contains('is-fallback')) return;
+        wrap.classList.add('is-fallback');
+        img.remove();
+      }, { once: true });
+    });
+  }
+
+  function initReviewsCarousel(root, testimonials = TESTIMONIALS, options = {}) {
+    const autoplay = options.autoplay ?? true;
+    const intervalMs = options.intervalMs ?? 6000;
+
+    let activeIndex = 0;
+    let autoplayTimer = null;
+    let slides = [];
+
+    root.className = 'reviews-carousel';
+    root.innerHTML = `
+      <div class="reviews-carousel__viewport">
+        <div class="reviews-carousel__track" role="list"></div>
+      </div>
+      <div class="reviews-carousel__footer">
+        <div class="reviews-carousel__dots" role="tablist" aria-label="Выбор отзыва"></div>
+        <div class="reviews-carousel__nav">
+          <button type="button" class="reviews-carousel__arrow reviews-carousel__arrow--prev cursor-target" aria-label="Предыдущий отзыв">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
-          <button type="button" class="circular-testimonials__arrow circular-testimonials__arrow--next cursor-target" aria-label="Следующий отзыв">
+          <button type="button" class="reviews-carousel__arrow reviews-carousel__arrow--next cursor-target" aria-label="Следующий отзыв">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
           </button>
         </div>
       </div>
-    </div>
-  `;
+    `;
 
-  const imagesEl = root.querySelector('.circular-testimonials__images');
-  const nameEl = root.querySelector('.circular-testimonials__name');
-  const designationEl = root.querySelector('.circular-testimonials__designation');
-  const quoteEl = root.querySelector('.circular-testimonials__quote');
-  const prevBtn = root.querySelector('.circular-testimonials__arrow--prev');
-  const nextBtn = root.querySelector('.circular-testimonials__arrow--next');
-  const textWrap = root.querySelector('.circular-testimonials__text');
+    const track = root.querySelector('.reviews-carousel__track');
+    const dotsEl = root.querySelector('.reviews-carousel__dots');
+    const prevBtn = root.querySelector('.reviews-carousel__arrow--prev');
+    const nextBtn = root.querySelector('.reviews-carousel__arrow--next');
 
-  const images = testimonials.map((item, index) => {
-    const img = document.createElement('img');
-    img.className = 'circular-testimonials__image';
-    img.src = item.src;
-    img.alt = item.name;
-    img.loading = index === 0 ? 'eager' : 'lazy';
-    img.dataset.index = String(index);
-    imagesEl.appendChild(img);
-    return img;
-  });
+    slides = testimonials.map((item, index) => {
+      const slide = createSlide(item, index);
+      track.appendChild(slide);
 
-  function measureWidth() {
-    if (imagesEl) containerWidth = imagesEl.offsetWidth || 900;
-  }
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'reviews-carousel__dot cursor-target';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Отзыв ${index + 1}: ${item.name}, ${item.designation}`);
+      dot.dataset.index = String(index);
+      dot.addEventListener('click', () => goTo(index));
+      dotsEl.appendChild(dot);
 
-  function updateImages() {
-    images.forEach((img, index) => {
-      const style = getImageStyle(index, activeIndex, testimonials.length, containerWidth);
-      Object.assign(img.style, style);
+      return slide;
     });
-  }
 
-  function updateContent(animate = true) {
-    const item = testimonials[activeIndex];
-    nameEl.textContent = item.name;
-    designationEl.textContent = item.designation;
+    bindPhotoFallbacks(root);
 
-    if (!animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      quoteEl.textContent = item.quote;
-      return;
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+
+      dotsEl.querySelectorAll('.reviews-carousel__dot').forEach((dot, index) => {
+        const isActive = index === activeIndex;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
     }
 
-    textWrap.style.opacity = '0';
-    textWrap.style.transform = 'translateY(12px)';
+    function goTo(index) {
+      activeIndex = (index + testimonials.length) % testimonials.length;
+      updateSlides();
+      resetAutoplay();
+    }
 
-    requestAnimationFrame(() => {
-      animateQuoteWords(quoteEl, item.quote);
-      animate(
-        textWrap,
-        { opacity: [0, 1], y: [12, 0] },
-        { duration: 0.35, ease: 'easeOut' }
-      );
-    });
-  }
+    function handleNext() {
+      goTo(activeIndex + 1);
+    }
 
-  function goTo(index) {
-    activeIndex = (index + testimonials.length) % testimonials.length;
-    updateImages();
-    updateContent();
-    resetAutoplay();
-  }
+    function handlePrev() {
+      goTo(activeIndex - 1);
+    }
 
-  function handleNext() {
-    goTo(activeIndex + 1);
-  }
-
-  function handlePrev() {
-    goTo(activeIndex - 1);
-  }
-
-  function resetAutoplay() {
-    if (!autoplay) return;
-    if (autoplayTimer) clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(handleNext, intervalMs);
-  }
-
-  prevBtn.addEventListener('click', handlePrev);
-  nextBtn.addEventListener('click', handleNext);
-
-  const onKey = (e) => {
-    if (e.key === 'ArrowLeft') handlePrev();
-    if (e.key === 'ArrowRight') handleNext();
-  };
-  window.addEventListener('keydown', onKey);
-
-  const onResize = () => {
-    measureWidth();
-    updateImages();
-  };
-  window.addEventListener('resize', onResize);
-
-  measureWidth();
-  updateImages();
-  updateContent(false);
-  resetAutoplay();
-
-  return {
-    destroy() {
+    function resetAutoplay() {
+      if (!autoplay) return;
       if (autoplayTimer) clearInterval(autoplayTimer);
-      window.removeEventListener('keydown', onKey);
-      window.removeEventListener('resize', onResize);
+      autoplayTimer = setInterval(handleNext, intervalMs);
     }
-  };
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-  const root = document.getElementById('reviews-carousel');
-  if (root) initCircularTestimonials(root);
-});
+    function stopAutoplay() {
+      if (autoplayTimer) clearInterval(autoplayTimer);
+    }
 
-export { initCircularTestimonials, TESTIMONIALS };
+    prevBtn.addEventListener('click', handlePrev);
+    nextBtn.addEventListener('click', handleNext);
+
+    root.addEventListener('mouseenter', stopAutoplay);
+    root.addEventListener('mouseleave', resetAutoplay);
+    root.addEventListener('focusin', stopAutoplay);
+    root.addEventListener('focusout', resetAutoplay);
+
+    const onKey = (e) => {
+      if (!root.contains(document.activeElement) && document.activeElement !== document.body) return;
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+    };
+    window.addEventListener('keydown', onKey);
+
+    updateSlides();
+    resetAutoplay();
+
+    return {
+      destroy() {
+        stopAutoplay();
+        window.removeEventListener('keydown', onKey);
+      }
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const root = document.getElementById('reviews-carousel');
+    if (root) initReviewsCarousel(root);
+  });
+})();
