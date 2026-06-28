@@ -503,15 +503,26 @@ class ArcballControl {
     this._combinedQuat = quat.create();
 
     canvas.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      canvas.setPointerCapture(e.pointerId);
       vec2.set(this.pointerPos, e.clientX, e.clientY);
       vec2.copy(this.previousPointerPos, this.pointerPos);
       this.isPointerDown = true;
     });
-    canvas.addEventListener('pointerup', () => {
+    canvas.addEventListener('pointerup', e => {
+      if (canvas.hasPointerCapture(e.pointerId)) {
+        canvas.releasePointerCapture(e.pointerId);
+      }
+      this.isPointerDown = false;
+    });
+    canvas.addEventListener('pointercancel', e => {
+      if (canvas.hasPointerCapture(e.pointerId)) {
+        canvas.releasePointerCapture(e.pointerId);
+      }
       this.isPointerDown = false;
     });
     canvas.addEventListener('pointerleave', () => {
-      this.isPointerDown = false;
+      if (!this.isPointerDown) return;
     });
     canvas.addEventListener('pointermove', e => {
       if (this.isPointerDown) {
@@ -553,6 +564,11 @@ class ArcballControl {
     } else {
       const INTENSITY = 0.1 * timeScale;
       quat.slerp(this.pointerRotation, this.pointerRotation, this.IDENTITY_QUAT, INTENSITY);
+
+      const autoRot = quat.create();
+      quat.setAxisAngle(autoRot, [0, 1, 0], 0.0025 * timeScale);
+      this.orientation = quat.multiply(quat.create(), autoRot, this.orientation);
+      quat.normalize(this.orientation, this.orientation);
 
       if (this.snapTargetDirection) {
         const SNAPPING_INTENSITY = 0.2;
@@ -781,7 +797,6 @@ class InfiniteGridMenu {
         ({ item }) =>
           new Promise(resolve => {
             const img = new Image();
-            img.crossOrigin = 'anonymous';
             img.onload = () => resolve(img);
             img.onerror = () => resolve(null);
             img.src = item.image;
@@ -989,27 +1004,32 @@ export const PORTFOLIO_ITEMS = [
   {
     title: 'GPT-агенты',
     description: 'Цифровые помощники для ответов клиентам и сбора заявок.',
-    link: '#contact'
+    link: '#contact',
+    image: 'images/Телеграм-бот.png'
   },
   {
     title: 'Лендинги',
     description: 'Страницы с понятной структурой и продающими текстами.',
-    link: '#contact'
+    link: '#contact',
+    image: 'images/лендинг.png'
   },
   {
     title: 'Контент-планы',
     description: 'Темы, рубрики и система публикаций на месяц вперёд.',
-    link: '#contact'
+    link: '#contact',
+    image: 'images/GPT-агент Копирайтер.png'
   },
   {
     title: 'Маркетинговые стратегии',
     description: 'Воронки продаж и путь клиента от знакомства до заявки.',
-    link: '#contact'
+    link: '#contact',
+    image: 'images/Маркетинговая стратегия 2.png'
   },
   {
     title: 'Нейровизуал',
     description: 'AI-изображения для соцсетей, сайта и рекламных материалов.',
-    link: '#contact'
+    link: '#contact',
+    image: 'images/Нейрофотосессия.png'
   }
 ];
 
@@ -1079,16 +1099,27 @@ export function initInfiniteMenu(container, items, options = {}) {
   return sketch;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('portfolio-infinite-menu');
   if (!container) return;
 
   const fallback = container.querySelector('.infinite-menu__fallback');
-  const sketch = initInfiniteMenu(container, PORTFOLIO_ITEMS, { scale: 1 });
+  const hint = container.querySelector('.infinite-menu__hint');
+
+  let sketch = null;
+
+  try {
+    sketch = initInfiniteMenu(container, PORTFOLIO_ITEMS, { scale: 1 });
+  } catch (error) {
+    console.error('InfiniteMenu init failed:', error);
+  }
 
   if (!sketch && fallback) {
     container.classList.add('infinite-menu--fallback');
     fallback.hidden = false;
+    if (hint) {
+      hint.textContent = 'Интерактивная сфера недоступна — показана галерея проектов';
+    }
   }
 });
 

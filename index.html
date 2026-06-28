@@ -290,7 +290,7 @@
     <section class="section" id="portfolio">
       <div class="container">
         <h2 class="section__title">Портфолио</h2>
-        <p class="section__lead">Проекты для психологов, коучей, экспертов, репетиторов и предпринимателей малого бизнеса. Вращайте сферу — выберите направление.</p>
+        <p class="section__lead">Проекты для психологов, коучей, экспертов, репетиторов и предпринимателей малого бизнеса. Вращайте сферу или выберите карточку ниже.</p>
         <div class="infinite-menu" id="portfolio-infinite-menu">
           <p class="infinite-menu__hint">Перетащите, чтобы вращать</p>
           <canvas class="infinite-menu__canvas" aria-label="Интерактивное портфолио"></canvas>
@@ -299,26 +299,58 @@
           <button type="button" class="infinite-menu__action inactive cursor-target" aria-label="Смотреть проект">↗</button>
           <div class="infinite-menu__fallback portfolio-grid" hidden>
             <a href="#contact" class="portfolio-card cursor-target">
+              <img class="portfolio-card__image" src="images/Телеграм-бот.png" alt="GPT-агент для Telegram" width="400" height="260" loading="lazy">
               <span class="portfolio-card__title">GPT-агенты</span>
               <span class="portfolio-card__hover">Смотреть проект</span>
             </a>
             <a href="#contact" class="portfolio-card cursor-target">
+              <img class="portfolio-card__image" src="images/лендинг.png" alt="Лендинг для экспертов" width="400" height="260" loading="lazy">
               <span class="portfolio-card__title">Лендинги</span>
               <span class="portfolio-card__hover">Смотреть проект</span>
             </a>
             <a href="#contact" class="portfolio-card cursor-target">
+              <img class="portfolio-card__image" src="images/GPT-агент Копирайтер.png" alt="GPT-агент копирайтер" width="400" height="260" loading="lazy">
               <span class="portfolio-card__title">Контент-планы</span>
               <span class="portfolio-card__hover">Смотреть проект</span>
             </a>
             <a href="#contact" class="portfolio-card cursor-target">
+              <img class="portfolio-card__image" src="images/Маркетинговая стратегия 2.png" alt="Маркетинговая стратегия" width="400" height="260" loading="lazy">
               <span class="portfolio-card__title">Маркетинговые стратегии</span>
               <span class="portfolio-card__hover">Смотреть проект</span>
             </a>
             <a href="#contact" class="portfolio-card cursor-target">
+              <img class="portfolio-card__image" src="images/Нейрофотосессия.png" alt="Нейровизуал и нейрофотосессия" width="400" height="260" loading="lazy">
               <span class="portfolio-card__title">Нейровизуал</span>
               <span class="portfolio-card__hover">Смотреть проект</span>
             </a>
           </div>
+        </div>
+        <div class="portfolio-grid portfolio-showcase">
+          <a href="#contact" class="portfolio-card cursor-target">
+            <img class="portfolio-card__image" src="images/Телеграм-бот.png" alt="GPT-агент для Telegram" width="400" height="260" loading="lazy">
+            <span class="portfolio-card__title">GPT-агенты</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card cursor-target">
+            <img class="portfolio-card__image" src="images/лендинг.png" alt="Лендинг для экспертов" width="400" height="260" loading="lazy">
+            <span class="portfolio-card__title">Лендинги</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card cursor-target">
+            <img class="portfolio-card__image" src="images/GPT-агент Копирайтер.png" alt="GPT-агент копирайтер" width="400" height="260" loading="lazy">
+            <span class="portfolio-card__title">Контент-планы</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card cursor-target">
+            <img class="portfolio-card__image" src="images/Маркетинговая стратегия 2.png" alt="Маркетинговая стратегия" width="400" height="260" loading="lazy">
+            <span class="portfolio-card__title">Маркетинговые стратегии</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
+          <a href="#contact" class="portfolio-card cursor-target">
+            <img class="portfolio-card__image" src="images/Нейрофотосессия.png" alt="Нейровизуал и нейрофотосессия" width="400" height="260" loading="lazy">
+            <span class="portfolio-card__title">Нейровизуал</span>
+            <span class="portfolio-card__hover">Смотреть проект</span>
+          </a>
         </div>
       </div>
     </section>
@@ -494,7 +526,20 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="target-cursor.js"></script>
   <script type="module" src="blur-text.js"></script>
-  <script type="module" src="infinite-menu.js"></script>
+  <script type="module">
+    try {
+      await import('./infinite-menu.js');
+    } catch (error) {
+      console.error('InfiniteMenu module failed to load:', error);
+      const container = document.getElementById('portfolio-infinite-menu');
+      if (!container) throw error;
+      const fallback = container.querySelector('.infinite-menu__fallback');
+      const hint = container.querySelector('.infinite-menu__hint');
+      container.classList.add('infinite-menu--fallback');
+      if (fallback) fallback.hidden = false;
+      if (hint) hint.textContent = 'Интерактивная сфера недоступна — показана галерея проектов';
+    }
+  </script>
   <script src="circular-testimonials.js"></script>
   <script src="booking-config.js"></script>
   <script src="booking-modal.js"></script>

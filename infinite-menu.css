@@ -19,6 +19,8 @@
   cursor: grab;
   outline: none;
   touch-action: none;
+  position: relative;
+  z-index: 1;
 }
 
 .infinite-menu__canvas:active {
@@ -82,7 +84,7 @@ html.has-custom-cursor .infinite-menu__canvas {
 .infinite-menu__face-title.active,
 .infinite-menu__face-desc.active {
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .infinite-menu__face-title.inactive,

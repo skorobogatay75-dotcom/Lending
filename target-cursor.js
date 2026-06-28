@@ -321,6 +321,7 @@
     '.nav a',
     '.service-card',
     '.help-card',
+    '.portfolio-card',
     '.infinite-menu__action',
     '.faq-item',
     '.price-item',
