@@ -333,7 +333,10 @@
     '.check-grid li',
     '.step',
     '.vibecode__panel',
-    '.contact__info a'
+    '.contact__info a',
+    '.booking-modal__close',
+    '.booking-form__input',
+    '.booking-form__consent'
   ];
 
   document.addEventListener('DOMContentLoaded', () => {

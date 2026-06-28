@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="target-cursor.css">
   <link rel="stylesheet" href="infinite-menu.css">
   <link rel="stylesheet" href="circular-testimonials.css">
+  <link rel="stylesheet" href="booking-modal.css">
 </head>
 <body>
 
@@ -28,7 +29,7 @@
         <a href="#pricing" class="cursor-target">Стоимость</a>
         <a href="#faq" class="cursor-target">Вопросы</a>
       </nav>
-      <a href="#contact" class="btn cursor-target btn--primary btn--sm">Записаться</a>
+      <button type="button" class="btn cursor-target btn--primary btn--sm" data-booking-open>Записаться</button>
       <button class="burger cursor-target" aria-label="Открыть меню" aria-expanded="false">
         <span></span>
         <span></span>
@@ -50,7 +51,7 @@
           <p class="hero__text">Помогаю экспертам, блогерам и предпринимателям использовать возможности искусственного интеллекта без сложных терминов и технической перегрузки.</p>
           <p class="hero__text">Настраиваю GPT-агентов, создаю контент-системы, помогаю упаковать услуги, выстроить путь клиента к заявке и освободить время для действительно важной работы.</p>
           <p class="hero__note">Без давления. Без обещаний «волшебной кнопки». С понятным результатом и человеческим подходом.</p>
-          <a href="#contact" class="btn cursor-target btn--primary btn--lg">Записаться на диагностику</a>
+          <button type="button" class="btn cursor-target btn--primary btn--lg" data-booking-open>Записаться на диагностику</button>
           <p class="hero__hint">На диагностической встрече разберём вашу ситуацию и определим, какие инструменты действительно будут полезны именно вам.</p>
         </div>
         <div class="hero__visual">
@@ -425,7 +426,7 @@
             <li>Без обязательств.</li>
             <li>Без сложных терминов.</li>
           </ul>
-          <a href="https://t.me/mariaskorobogatayAI" class="btn cursor-target btn--primary btn--lg" target="_blank" rel="noopener">Записаться на диагностику</a>
+          <button type="button" class="btn cursor-target btn--primary btn--lg" data-booking-open>Записаться на диагностику</button>
         </div>
         <div class="contact__info">
           <h3 class="heading-sm">Контакты</h3>
@@ -455,11 +456,48 @@
     </div>
   </footer>
 
+  <div class="booking-modal" id="booking-modal" hidden aria-hidden="true">
+    <div class="booking-modal__backdrop" data-booking-close tabindex="-1"></div>
+    <div class="booking-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
+      <button type="button" class="booking-modal__close cursor-target" data-booking-close aria-label="Закрыть">&times;</button>
+      <h2 class="booking-modal__title" id="booking-modal-title">Записаться на диагностику</h2>
+      <p class="booking-modal__lead">Оставьте контакты — свяжусь с вами для назначения встречи.</p>
+      <form class="booking-form" id="booking-form" novalidate>
+        <div class="booking-form__field">
+          <label class="booking-form__label" for="booking-name">Имя</label>
+          <input class="booking-form__input cursor-target" type="text" id="booking-name" name="name" autocomplete="name" required placeholder="Как к вам обращаться">
+        </div>
+        <div class="booking-form__field">
+          <label class="booking-form__label" for="booking-email">E-mail</label>
+          <input class="booking-form__input cursor-target" type="email" id="booking-email" name="email" autocomplete="email" required placeholder="example@mail.ru">
+        </div>
+        <div class="booking-form__field">
+          <label class="booking-form__label" for="booking-phone">Телефон</label>
+          <input class="booking-form__input cursor-target" type="tel" id="booking-phone" name="phone" autocomplete="tel" required placeholder="+7 (921) 000-00-00">
+        </div>
+        <label class="booking-form__consent cursor-target">
+          <input type="checkbox" name="consent" required>
+          <span class="booking-form__consent-text">Даю согласие на обработку моих персональных данных</span>
+        </label>
+        <button type="submit" class="btn btn--primary btn--lg booking-form__submit cursor-target">Отправить заявку</button>
+        <p class="booking-form__error" role="alert" hidden></p>
+      </form>
+      <div class="booking-modal__success" hidden>
+        <div class="booking-modal__success-icon" aria-hidden="true">✓</div>
+        <h3 class="booking-modal__success-title">Спасибо!</h3>
+        <p class="booking-modal__success-text">Заявка сформирована. Если почтовая программа не открылась — отправьте данные через Telegram.</p>
+        <a href="https://t.me/mariaskorobogatayAI" class="btn btn--primary cursor-target" data-booking-telegram target="_blank" rel="noopener">Отправить в Telegram</a>
+        <button type="button" class="btn btn--outline cursor-target" data-booking-close style="margin-top: 0.75rem; width: 100%;">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="target-cursor.js"></script>
   <script type="module" src="blur-text.js"></script>
   <script type="module" src="infinite-menu.js"></script>
   <script src="circular-testimonials.js"></script>
+  <script src="booking-modal.js"></script>
   <script>
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav');
