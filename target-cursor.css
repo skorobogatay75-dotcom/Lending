@@ -14,7 +14,7 @@
   top: 50%;
   width: 5px;
   height: 5px;
-  background: #c7a25d;
+  background: #e8b04a;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   will-change: transform;
@@ -26,7 +26,7 @@
   top: 50%;
   width: 12px;
   height: 12px;
-  border: 2px solid #1f3556;
+  border: 2px solid #38bdf8;
   will-change: transform;
 }
 
@@ -57,15 +57,15 @@
 /* Тёмные секции — золото и молочный для контраста */
 .contact .target-cursor-corner,
 .footer ~ .target-cursor-wrapper .target-cursor-corner {
-  border-color: #f5f2eb;
+  border-color: #e8b04a;
 }
 
 .target-cursor-wrapper--on-dark .target-cursor-corner {
-  border-color: #f5f2eb;
+  border-color: #e8b04a;
 }
 
 .target-cursor-wrapper--on-dark .target-cursor-dot {
-  background: #c7a25d;
+  background: #38bdf8;
 }
 
 html.has-custom-cursor,
