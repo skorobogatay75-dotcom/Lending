@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="target-cursor.css">
+  <link rel="stylesheet" href="infinite-menu.css">
 </head>
 <body>
 
@@ -282,28 +283,35 @@
     <section class="section" id="portfolio">
       <div class="container">
         <h2 class="section__title">Портфолио</h2>
-        <p class="section__lead">Проекты для психологов, коучей, экспертов, репетиторов и предпринимателей малого бизнеса.</p>
-        <div class="portfolio-grid">
-          <a href="#contact" class="portfolio-card cursor-target">
-            <span class="portfolio-card__title">GPT-агенты</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <span class="portfolio-card__title">Лендинги</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <span class="portfolio-card__title">Контент-планы</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <span class="portfolio-card__title">Маркетинговые стратегии</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <span class="portfolio-card__title">Нейровизуал</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
+        <p class="section__lead">Проекты для психологов, коучей, экспертов, репетиторов и предпринимателей малого бизнеса. Вращайте сферу — выберите направление.</p>
+        <div class="infinite-menu" id="portfolio-infinite-menu">
+          <p class="infinite-menu__hint">Перетащите, чтобы вращать</p>
+          <canvas class="infinite-menu__canvas" aria-label="Интерактивное портфолио"></canvas>
+          <h3 class="infinite-menu__face-title inactive"></h3>
+          <p class="infinite-menu__face-desc inactive"></p>
+          <button type="button" class="infinite-menu__action inactive cursor-target" aria-label="Смотреть проект">↗</button>
+          <div class="infinite-menu__fallback portfolio-grid" hidden>
+            <a href="#contact" class="portfolio-card cursor-target">
+              <span class="portfolio-card__title">GPT-агенты</span>
+              <span class="portfolio-card__hover">Смотреть проект</span>
+            </a>
+            <a href="#contact" class="portfolio-card cursor-target">
+              <span class="portfolio-card__title">Лендинги</span>
+              <span class="portfolio-card__hover">Смотреть проект</span>
+            </a>
+            <a href="#contact" class="portfolio-card cursor-target">
+              <span class="portfolio-card__title">Контент-планы</span>
+              <span class="portfolio-card__hover">Смотреть проект</span>
+            </a>
+            <a href="#contact" class="portfolio-card cursor-target">
+              <span class="portfolio-card__title">Маркетинговые стратегии</span>
+              <span class="portfolio-card__hover">Смотреть проект</span>
+            </a>
+            <a href="#contact" class="portfolio-card cursor-target">
+              <span class="portfolio-card__title">Нейровизуал</span>
+              <span class="portfolio-card__hover">Смотреть проект</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -469,6 +477,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="target-cursor.js"></script>
   <script type="module" src="blur-text.js"></script>
+  <script type="module" src="infinite-menu.js"></script>
   <script>
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav');
