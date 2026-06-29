@@ -469,12 +469,36 @@ ul, ol {
 
 .hero__title {
   font-size: var(--heading-xl);
-  line-height: 1.1;
+  line-height: 1.12;
   margin-bottom: 32px;
+}
+
+.hero__title-line {
+  display: block;
+  animation: hero-title-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero__title-line:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+@keyframes hero-title-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
 }
 
 .hero__title.blur-text {
   animation: none;
+  line-height: 1.12;
 }
 
 .blur-text__line {
@@ -482,12 +506,15 @@ ul, ol {
 }
 
 .blur-text__segment {
+  display: inline-block;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   letter-spacing: inherit;
   line-height: inherit;
   color: inherit;
+  vertical-align: baseline;
+  white-space: pre-wrap;
 }
 
 .hero__text {

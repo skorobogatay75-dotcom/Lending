@@ -135,13 +135,13 @@ function createBlurText(root, options = {}) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const heroTitle = document.querySelector('.hero__title');
+  const heroTitle = document.querySelector('.hero__title:not(.hero__title--static)');
   if (!heroTitle) return;
 
   createBlurText(heroTitle, {
-    animateBy: 'letters',
+    animateBy: 'words',
     direction: 'top',
-    delay: 80,
+    delay: 60,
     stepDuration: 0.35,
     threshold: 0.2
   });
