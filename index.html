@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="target-cursor.css">
-  <link rel="stylesheet" href="infinite-menu.css">
+  <link rel="stylesheet" href="portfolio-carousel.css">
   <link rel="stylesheet" href="circular-testimonials.css">
   <link rel="stylesheet" href="booking-modal.css">
 </head>
@@ -293,115 +293,10 @@
     <section class="section" id="portfolio">
       <div class="container">
         <h2 class="section__title">Портфолио</h2>
-        <p class="section__lead">Проекты для психологов, коучей, экспертов, репетиторов и предпринимателей малого бизнеса. Вращайте сферу или выберите карточку ниже.</p>
-        <div class="infinite-menu" id="portfolio-infinite-menu">
-          <p class="infinite-menu__hint">Перетащите, чтобы вращать</p>
-          <canvas class="infinite-menu__canvas" aria-label="Интерактивное портфолио"></canvas>
-          <h3 class="infinite-menu__face-title inactive"></h3>
-          <p class="infinite-menu__face-desc inactive"></p>
-          <button type="button" class="infinite-menu__action inactive cursor-target" aria-label="Смотреть проект">↗</button>
-          <div class="infinite-menu__fallback portfolio-grid" hidden>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image" src="images/portfolio/gpt-copywriter.png" alt="GPT-агент — Копирайтер мощных продающих текстов" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">GPT-агенты</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image" src="images/лендинг.png" alt="Лендинг для экспертов" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Лендинги</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image portfolio-card__image--table" src="images/portfolio/content-plan-7days.png" alt="Контент-план на 7 дней" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Контент-план на 7 дней</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image portfolio-card__image--table" src="images/portfolio/content-warmup-5days.png" alt="Таблица прогрева на 5 дней" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Прогрев на 5 дней</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image" src="images/Маркетинговая стратегия 2.png" alt="Маркетинговая стратегия" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Маркетинговые стратегии</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image" src="images/Нейрофотосессия.png" alt="Нейровизуал и нейрофотосессия" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Нейровизуал</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-          </div>
-        </div>
-        <div class="portfolio-grid portfolio-showcase">
-          <a href="#contact" class="portfolio-card cursor-target">
-            <img class="portfolio-card__image" src="images/portfolio/gpt-copywriter.png" alt="GPT-агент — Копирайтер мощных продающих текстов" width="400" height="260" loading="lazy">
-            <span class="portfolio-card__title">GPT-агенты</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <img class="portfolio-card__image" src="images/лендинг.png" alt="Лендинг для экспертов" width="400" height="260" loading="lazy">
-            <span class="portfolio-card__title">Лендинги</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <img class="portfolio-card__image portfolio-card__image--table" src="images/portfolio/content-plan-7days.png" alt="Контент-план на 7 дней" width="400" height="260" loading="lazy">
-            <span class="portfolio-card__title">Контент-план на 7 дней</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <img class="portfolio-card__image portfolio-card__image--table" src="images/portfolio/content-warmup-5days.png" alt="Таблица прогрева на 5 дней" width="400" height="260" loading="lazy">
-            <span class="portfolio-card__title">Прогрев на 5 дней</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <img class="portfolio-card__image" src="images/Маркетинговая стратегия 2.png" alt="Маркетинговая стратегия" width="400" height="260" loading="lazy">
-            <span class="portfolio-card__title">Маркетинговые стратегии</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-          <a href="#contact" class="portfolio-card cursor-target">
-            <img class="portfolio-card__image" src="images/Нейрофотосессия.png" alt="Нейровизуал и нейрофотосессия" width="400" height="260" loading="lazy">
-            <span class="portfolio-card__title">Нейровизуал</span>
-            <span class="portfolio-card__hover">Смотреть проект</span>
-          </a>
-        </div>
-
-        <div class="portfolio-subsection portfolio-bots" id="portfolio-bots">
-          <h3 class="portfolio-subsection__title">Боты</h3>
-          <p class="portfolio-subsection__lead">Telegram-боты для контента, ответов клиентам и автоматизации рутинных задач.</p>
-          <div class="portfolio-grid portfolio-grid--bots">
-            <a href="https://t.me/mariaskorobogatayAI" class="portfolio-card cursor-target" target="_blank" rel="noopener">
-              <img class="portfolio-card__image" src="images/portfolio/telegram-copywriter-bot.png" alt="Telegram-бот — Копирайтер для Скоробогатой Марии" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Копирайтер для Telegram</span>
-              <span class="portfolio-card__desc">Посты, картинки и публикации — прямо в мессенджере</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="portfolio-subsection portfolio-apps" id="portfolio-apps">
-          <h3 class="portfolio-subsection__title">Приложения</h3>
-          <p class="portfolio-subsection__lead">Мини-приложения, формы и калькуляторы — готовые цифровые инструменты для бизнеса и экспертов.</p>
-          <div class="portfolio-grid portfolio-grid--apps">
-            <a href="#contact" class="portfolio-card cursor-target" data-booking-open>
-              <img class="portfolio-card__image" src="images/applications/consultation-form.png" alt="Форма записи на консультацию" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Запись на консультацию</span>
-              <span class="portfolio-card__desc">Форма для сбора заявок: имя, телефон, e-mail</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image" src="images/applications/content-assistant.png" alt="Генератор идей для постов" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Генератор идей для постов</span>
-              <span class="portfolio-card__desc">Контент-ассистент: идеи постов, сторис и план на неделю</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-            <a href="#contact" class="portfolio-card cursor-target">
-              <img class="portfolio-card__image" src="images/applications/family-budget.png" alt="Семейный бюджет — калькулятор" width="400" height="260" loading="lazy">
-              <span class="portfolio-card__title">Семейный бюджет</span>
-              <span class="portfolio-card__desc">Калькулятор доходов и расходов с сохранением в браузере</span>
-              <span class="portfolio-card__hover">Смотреть проект</span>
-            </a>
-          </div>
+        <p class="section__lead">Проекты для психологов, коучей, экспертов, репетиторов и предпринимателей малого бизнеса — листайте карусель или выберите точку ниже.</p>
+        <div id="portfolio-carousel" aria-label="Портфолио проектов"></div>
+        <div class="section__cta portfolio__cta">
+          <a href="https://disk.yandex.ru/d/esYzlVo7LPv2dA" class="btn cursor-target btn--primary btn--lg" target="_blank" rel="noopener noreferrer">Посмотреть каталог</a>
         </div>
       </div>
     </section>
@@ -453,9 +348,6 @@
           </div>
         </div>
         <p class="pricing-note">Подробный каталог услуг и актуальные цены доступны по запросу.</p>
-        <div class="section__cta">
-          <a href="https://disk.yandex.ru/d/esYzlVo7LPv2dA" class="btn cursor-target btn--outline" target="_blank" rel="noopener noreferrer">Посмотреть каталог</a>
-        </div>
       </div>
     </section>
 
@@ -576,20 +468,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="target-cursor.js"></script>
-  <script type="module">
-    try {
-      await import('./infinite-menu.js');
-    } catch (error) {
-      console.error('InfiniteMenu module failed to load:', error);
-      const container = document.getElementById('portfolio-infinite-menu');
-      if (!container) throw error;
-      const fallback = container.querySelector('.infinite-menu__fallback');
-      const hint = container.querySelector('.infinite-menu__hint');
-      container.classList.add('infinite-menu--fallback');
-      if (fallback) fallback.hidden = false;
-      if (hint) hint.textContent = 'Интерактивная сфера недоступна — показана галерея проектов';
-    }
-  </script>
+  <script src="portfolio-carousel.js"></script>
   <script src="circular-testimonials.js"></script>
   <script src="booking-config.js"></script>
   <script src="booking-modal.js"></script>

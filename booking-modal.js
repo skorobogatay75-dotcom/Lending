@@ -174,12 +174,12 @@
 
     const form = $('.booking-form', modal);
 
-    document.querySelectorAll('[data-booking-open]').forEach((trigger) => {
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        resetForm(modal);
-        openModal(modal);
-      });
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-booking-open]');
+      if (!trigger) return;
+      e.preventDefault();
+      resetForm(modal);
+      openModal(modal);
     });
 
     modal.querySelectorAll('[data-booking-close]').forEach((el) => {

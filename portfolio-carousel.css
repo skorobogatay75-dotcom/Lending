@@ -1,0 +1,201 @@
+/* Portfolio carousel */
+.portfolio-carousel {
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.portfolio-carousel__frame {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card, 18px);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+}
+
+.portfolio-carousel__frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-accent-cyan));
+  z-index: 2;
+}
+
+.portfolio-carousel__viewport {
+  position: relative;
+  height: clamp(14rem, 36vw, 22rem);
+}
+
+.portfolio-carousel__track {
+  position: relative;
+  height: 100%;
+}
+
+.portfolio-carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  transition:
+    opacity 0.45s var(--ease-out, ease),
+    transform 0.45s var(--ease-out, ease),
+    visibility 0.45s;
+  pointer-events: none;
+}
+
+.portfolio-carousel__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Фиксированная рамка — одинаковый размер, без растягивания */
+.portfolio-carousel__media {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.25rem;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, rgba(255, 255, 255, 0.04), transparent),
+    linear-gradient(180deg, #141a24 0%, #0a0e14 100%);
+  overflow: hidden;
+}
+
+.portfolio-carousel__image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center center;
+  border-radius: 6px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+}
+
+.portfolio-carousel__catalog {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.portfolio-carousel__catalog .portfolio__cta,
+.portfolio__cta {
+  margin: 0;
+}
+
+.portfolio-carousel__info {
+  margin-top: 1.25rem;
+  padding: 0 0.5rem;
+  text-align: center;
+  min-height: 5.5rem;
+}
+
+.portfolio-carousel__tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-carousel__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  font-weight: 600;
+  color: var(--color-navy);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.portfolio-carousel__desc {
+  margin: 0 auto;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.portfolio-carousel__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 0 0.25rem;
+}
+
+.portfolio-carousel__dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.portfolio-carousel__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.18);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.portfolio-carousel__dot.is-active {
+  background: var(--color-gold);
+  transform: scale(1.25);
+}
+
+.portfolio-carousel__nav {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.portfolio-carousel__arrow {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-solid);
+  color: var(--color-white);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s ease;
+}
+
+.portfolio-carousel__arrow:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: #070b12;
+  transform: scale(1.05);
+}
+
+@media (max-width: 767px) {
+  .portfolio-carousel__viewport {
+    height: clamp(12.5rem, 52vw, 16rem);
+  }
+
+  .portfolio-carousel__media {
+    padding: 0.75rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-carousel__slide {
+    transition: none;
+  }
+}
