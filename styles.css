@@ -496,27 +496,6 @@ ul, ol {
   }
 }
 
-.hero__title.blur-text {
-  animation: none;
-  line-height: 1.12;
-}
-
-.blur-text__line {
-  display: block;
-}
-
-.blur-text__segment {
-  display: inline-block;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  color: inherit;
-  vertical-align: baseline;
-  white-space: pre-wrap;
-}
-
 .hero__text {
   color: var(--color-text-muted);
   margin-bottom: 20px;
